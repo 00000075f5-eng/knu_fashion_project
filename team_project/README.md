@@ -3,7 +3,7 @@
 강의자료(4·5·6장, 1~13주)의 코드 구조를 그대로 따라 만든 코드입니다. 모두 `C:\knu_Fashion_Project` 폴더에서 순서대로 실행합니다.
 
 ```
-python team_project/baseline_two_layer.py      # 1단계: 수업의 2층 신경망 (기준 모델)            약 20초
+python mid_check/baseline_two_layer.py      # 1단계: 수업의 2층 신경망 (기준 모델)            약 20초
 python team_project/hyperparameter_search.py   # 2단계: 학습률·가중치 감소 계수 탐색 (6.5절)     약 5~10분
 python team_project/fashion_example_model.py   # 3단계: 최종 모델 학습 → network_Team5.pkl 저장  약 2분
 python team_project/check_competition.py       # 4단계: pkl만 불러와 200장 정확도 확인
@@ -54,7 +54,7 @@ python team_project/check_competition.py       # 4단계: pkl만 불러와 200�
 
 | 파일 | 내용 |
 | --- | --- |
-| `baseline_two_layer.py` | 1단계. 수업 5.7.4절 코드에서 데이터만 Fashion-MNIST로, test 대신 val로 바꾼 것 |
+| `../mid_check/baseline_two_layer.py` | 1단계 (중간 점검 폴더로 이동). 수업 5.7.4절 코드에서 데이터만 Fashion-MNIST로, test 대신 val로 바꾼 것 |
 | `hyperparameter_search.py` | 2단계. 교재 `ch06/hyperparameter_optimization.py` 방식의 Randomized Grid Search |
 | `fashion_example_model.py` | 3단계. ①~⑤를 적용한 최종 모델. 가장 좋은 에폭의 모델을 pkl로 저장 |
 | `check_competition.py` | 4단계. pkl만 불러와 Competition처럼 200장 정확도 확인 |

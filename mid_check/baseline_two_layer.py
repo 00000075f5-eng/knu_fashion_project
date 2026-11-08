@@ -11,7 +11,7 @@ r"""
 
 이 모델의 정확도가 이후 모든 실험의 비교 기준이 된다.
 
-실행: C:\knu_Neural_Net 폴더에서  python team_project/baseline_two_layer.py
+실행: C:\knu_Neural_Net 폴더에서  python mid_check/baseline_two_layer.py
 """
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir))  # 부모 디렉터리의 파일을 가져올 수 있도록 설정
