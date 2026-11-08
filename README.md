@@ -54,12 +54,12 @@ python team_project/check_competition.py       # 4단계: pkl만 불러와 200�
 
 | 파일 | 내용 |
 | --- | --- |
-| `../mid_check/baseline_two_layer.py` | 1단계 (중간 점검 폴더로 이동). 수업 5.7.4절 코드에서 데이터만 Fashion-MNIST로, test 대신 val로 바꾼 것 |
-| `hyperparameter_search.py` | 2단계. 교재 `ch06/hyperparameter_optimization.py` 방식의 Randomized Grid Search |
-| `fashion_example_model.py` | 3단계. ①~⑤를 적용한 최종 모델. 가장 좋은 에폭의 모델을 pkl로 저장 |
-| `check_competition.py` | 4단계. pkl만 불러와 Competition처럼 200장 정확도 확인 |
-| `*.png` | 손실·정확도 그래프, 탐색 결과 그래프 (실행하면 새로 그려짐) |
-| `network_Team5.pkl` | 3단계를 실행하면 생기는 제출 파일 |
+| `mid_check/baseline_two_layer.py` | 1단계 (중간 점검 폴더로 이동). 수업 5.7.4절 코드에서 데이터만 Fashion-MNIST로, test 대신 val로 바꾼 것 |
+| `team_project/hyperparameter_search.py` | 2단계. 교재 `ch06/hyperparameter_optimization.py` 방식의 Randomized Grid Search |
+| `team_project/fashion_example_model.py` | 3단계. ①~⑤를 적용한 최종 모델. 가장 좋은 에폭의 모델을 pkl로 저장 |
+| `team_project/check_competition.py` | 4단계. pkl만 불러와 Competition처럼 200장 정확도 확인 |
+| `team_project/*.png` | 손실·정확도 그래프, 탐색 결과 그래프 (실행하면 새로 그려짐) |
+| `team_project/network_Team5.pkl` | 3단계를 실행하면 생기는 제출 파일 |
 
 ## 주의할 점
 
