@@ -47,10 +47,10 @@ x_train, t_train = x_train[validation_num:], t_train[validation_num:]
 network = MultiLayerNetExtend(input_size=784, hidden_size_list=[256, 128, 64], output_size=10,
                               activation='relu',
                               weight_init_std='he',          # He 초깃값 (6.2절)
-                              weight_decay_lambda=1e-4,      # 가중치 감소 (6.4절)
+                              weight_decay_lambda=5e-7,      # 가중치 감소 (6.4절)
                               use_dropout=True, dropout_ration=0.2,   # 드롭아웃 (6.4절)
                               use_batchnorm=True)            # 배치 정규화 (6.3절)
-optimizer = Adam(lr=0.001)                                   # Adam (6.1절)
+optimizer = Adam(lr=0.0025)                                   # Adam (6.1절)
 
 # ── 하이퍼파라미터 ──
 max_epochs = 20
