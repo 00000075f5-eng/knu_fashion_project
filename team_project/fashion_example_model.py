@@ -43,8 +43,8 @@ x_val, t_val = x_train[:validation_num], t_train[:validation_num]
 x_train, t_train = x_train[validation_num:], t_train[validation_num:]
 
 # ── 신경망 만들기 ──
-# 784 → 256 → 128 → 64 → 10  (은닉층 3개, Affine 층 4개 → "6층 이하" 조건 만족)
-network = MultiLayerNetExtend(input_size=784, hidden_size_list=[256, 128, 64], output_size=10,
+# 784 → 256 → 256 → 256 → 10  (은닉층 3개, Affine 층 4개 → "6층 이하" 조건 만족)
+network = MultiLayerNetExtend(input_size=784, hidden_size_list=[256, 256, 256], output_size=10,
                               activation='relu',
                               weight_init_std='he',          # He 초깃값 (6.2절)
                               weight_decay_lambda=5e-7,      # 가중치 감소 (6.4절)
