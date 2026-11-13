@@ -3,7 +3,6 @@
 강의자료(4·5·6장, 1~13주)의 코드 구조를 그대로 따라 만든 코드입니다. 모두 `C:\knu_Fashion_Project` 폴더에서 순서대로 실행합니다.
 
 ```
-python mid_check/baseline_two_layer.py      # 1단계: 수업의 2층 신경망 (기준 모델)            약 20초
 python team_project/experiments/compare_optimizer.py  # 비교 실험 ①: 옵티마이저 4종 손실 비교      수 분 이내
 python team_project/experiments/compare_depth.py      # 비교 실험 ②: 은닉층 1~4개 × 너비 64/128/256  약 20~40분
 python team_project/hyperparameter_search.py   # 2단계: 학습률·가중치 감소 계수 탐색 (6.5절)     약 5~10분
@@ -102,7 +101,6 @@ python team_project/check_competition.py       # 4단계: pkl만 불러와 200�
 
 | 파일 | 내용 |
 | --- | --- |
-| `mid_check/baseline_two_layer.py` | 1단계 (중간 점검 폴더로 이동). 수업 5.7.4절 코드에서 데이터만 Fashion-MNIST로, test 대신 val로 바꾼 것 |
 | `team_project/experiments/compare_optimizer.py` | 비교 실험 ①. SGD·Momentum·AdaGrad·Adam의 훈련 손실 비교 (교재 `ch06/optimizer_compare_mnist.py`를 Fashion-MNIST로 간단히 수정) → `compare_optimizer.png` |
 | `team_project/experiments/compare_depth.py` | 비교 실험 ②. 은닉층 1~4개 × 너비 64/128/256 비교 → `compare_depth_width.png` (`compare_depth.png`는 너비 100, 은닉층 1~5개를 비교한 처음 결과) |
 | `team_project/hyperparameter_search.py` | 2단계. 교재 `ch06/hyperparameter_optimization.py` 방식의 Randomized Grid Search |
