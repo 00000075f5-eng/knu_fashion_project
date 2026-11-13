@@ -4,7 +4,7 @@
 
 ```
 python mid_check/baseline_two_layer.py      # 1단계: 수업의 2층 신경망 (기준 모델)            약 20초
-python team_project/experiments/compare_optimizer.py  # 비교 실험 ①: 옵티마이저 4종 비교       약 10~20분
+python team_project/experiments/compare_optimizer.py  # 비교 실험 ①: 옵티마이저 4종 손실 비교      수 분 이내
 python team_project/experiments/compare_depth.py      # 비교 실험 ②: 은닉층 1~4개 × 너비 64/128/256  약 20~40분
 python team_project/hyperparameter_search.py   # 2단계: 학습률·가중치 감소 계수 탐색 (6.5절)     약 5~10분
 python team_project/fashion_example_model.py   # 3단계: 최종 모델 학습 → network_Team5.pkl 저장  약 2분
@@ -28,23 +28,28 @@ python team_project/check_competition.py       # 4단계: pkl만 불러와 200�
 
 ## 비교 실험 결과 (`team_project/experiments/`)
 
-두 실험 모두 한 번에 하나만 바꾸고, 같은 데이터 분리(훈련 50,000 / 검증 10,000)에서 10에폭 학습했습니다. 시드 3개로 반복해 **검증 정확도의 평균 ± 표준편차**를 적었습니다. 시험 데이터는 쓰지 않았습니다.
+두 실험 모두 한 번에 하나만 바꾸고 비교했습니다. 시험 데이터는 쓰지 않았습니다.
 
-### ① 옵티마이저 비교 (`compare_optimizer.py`, 강의 6.1.8절)
+### ① 옵티마이저 비교 (`compare_optimizer.py`, 강의 6.1.8절 / 6장 실습문제 4번)
 
-고정: 784 → 256 → 128 → 64 → 10, He, 배치 정규화, 드롭아웃 0.2, 가중치 감소 5e-7. 학습률은 교재 예제처럼 각 옵티마이저의 기본값입니다.
+교재 `ch06/optimizer_compare_mnist.py`를 Fashion-MNIST로 바꿔 간단하게 수정한 것입니다. 네 옵티마이저로 같은 구조의 신경망을 같은 미니배치로 학습시키고, **훈련 손실(loss)이 줄어드는 속도**를 비교합니다.
 
-| 옵티마이저 | 학습률 | 1에폭 후 val | 10에폭 후 val |
-| --- | --- | --- | --- |
-| SGD | 0.01 | 77.12% | 86.28% ± 0.08%p |
-| Momentum | 0.01 | 84.77% | 88.85% ± 0.07%p |
-| AdaGrad | 0.01 | **86.36%** | 89.07% ± 0.06%p |
-| Adam | 0.001 | 85.67% | **89.20% ± 0.34%p** |
+- 신경망: 784 → 100 → 100 → 100 → 10 (`MultiLayerNet`, 기본 초깃값, 배치 정규화·드롭아웃·가중치 감소 없음)
+- 옵티마이저: SGD, Momentum, AdaGrad, Adam (각 클래스의 기본 학습률)
+- 배치 128, 2,000번 반복, 시드 고정 없음(1회 실행)
+- 기록하는 값: 훈련 미니배치 손실 (검증 정확도는 측정하지 않음) → `compare_optimizer.png`
 
-- SGD가 가장 느리고 정확도도 약 3%p 낮습니다. 나머지 셋은 처음부터 빠르게 학습합니다. 강의 6.1.8절 MNIST 결과와 같은 경향입니다.
-- 1에폭 후에는 AdaGrad가 가장 빨랐습니다. 이것도 강의의 "AdaGrad가 가장 빠름"과 같습니다.
-- 10에폭 후에는 Adam이 가장 높지만, AdaGrad와의 차이(0.13%p)가 Adam의 표준편차(0.34%p)보다 작아서 **사실상 비슷**합니다.
-- 결론: SGD 대신 적응적 옵티마이저를 쓰는 것이 확실히 좋고, 그중 최근 가장 많이 쓰는 Adam을 최종 모델에 유지했습니다.
+| 옵티마이저 | 2,000번 반복 후 손실 (그래프 기준, 대략) |
+| --- | --- |
+| SGD | 약 0.40 |
+| Momentum | 약 0.30 |
+| AdaGrad | 약 0.28 |
+| Adam | 약 0.28 |
+
+- SGD가 가장 느리게 줄어듭니다. 나머지 셋은 처음 몇백 번 안에 빠르게 줄어듭니다. 강의 6.1.8절 MNIST 결과와 같은 경향입니다.
+- AdaGrad·Adam·Momentum은 후반에 서로 비슷해서 그래프만으로는 순위를 가리기 어렵습니다. 1회 실행이고 손실이 출렁이기 때문입니다.
+- 결론: SGD 대신 적응적 옵티마이저를 쓰는 것이 좋고, 그중 최근 가장 많이 쓰는 Adam을 최종 모델에 유지했습니다.
+- 이 실험은 손실만 보므로 검증 정확도 비교는 포함하지 않습니다.
 
 ### 은닉층 깊이 × 너비 비교 (`compare_depth.py`, 모델 결정)
 
@@ -98,7 +103,7 @@ python team_project/check_competition.py       # 4단계: pkl만 불러와 200�
 | 파일 | 내용 |
 | --- | --- |
 | `mid_check/baseline_two_layer.py` | 1단계 (중간 점검 폴더로 이동). 수업 5.7.4절 코드에서 데이터만 Fashion-MNIST로, test 대신 val로 바꾼 것 |
-| `team_project/experiments/compare_optimizer.py` | 비교 실험 ①. SGD·Momentum·AdaGrad·Adam 비교 (교재 `ch06/optimizer_compare_mnist.py` 방식) → `compare_optimizer.png` |
+| `team_project/experiments/compare_optimizer.py` | 비교 실험 ①. SGD·Momentum·AdaGrad·Adam의 훈련 손실 비교 (교재 `ch06/optimizer_compare_mnist.py`를 Fashion-MNIST로 간단히 수정) → `compare_optimizer.png` |
 | `team_project/experiments/compare_depth.py` | 비교 실험 ②. 은닉층 1~4개 × 너비 64/128/256 비교 → `compare_depth_width.png` (`compare_depth.png`는 너비 100, 은닉층 1~5개를 비교한 처음 결과) |
 | `team_project/hyperparameter_search.py` | 2단계. 교재 `ch06/hyperparameter_optimization.py` 방식의 Randomized Grid Search |
 | `team_project/fashion_example_model.py` | 3단계. ①~⑤를 적용한 최종 모델. 가장 좋은 에폭의 모델을 pkl로 저장 (은닉층 3개 × 너비 256) |
